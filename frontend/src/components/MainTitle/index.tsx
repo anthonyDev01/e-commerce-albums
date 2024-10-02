@@ -1,9 +1,13 @@
-interface MainTitleProps{
-    fontSize: string
+interface MainTitleProps {
+    className: string;
 }
 
-const MainTitle = ({fontSize}: MainTitleProps) => {
-    return <h1 className={`w-full ${fontSize} font-bold`}>A história da música não pode ser esquecida!</h1>;
+const MainTitle = ({ className }: MainTitleProps) => {
+    return (
+        <h1 className={`w-full ${className} font-bold`}>
+            A história da música não pode ser esquecida!
+        </h1>
+    );
 };
 
 export default MainTitle;

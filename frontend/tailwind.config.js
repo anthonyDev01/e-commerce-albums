@@ -7,9 +7,21 @@ export default {
                 sysmap_black: "#010B0F",
                 sysmap_ligth: "#9EE2FF",
             },
+
+            backgroundImage: {
+                "background-home":
+                    "linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(./src/assets/bg-1.jpg)",
+                "background-dashboard":
+                    "linear-gradient(180deg, rgba(25,24,31,0) 0%, rgba(25,24,31,1) 97%), url(./src/assets/banner-bg.jpg)",
+            },
+
             fontFamily: {
                 comics_neue: ["Comic-Neue", "cursive"],
             },
+            boxShadow: {
+                cardShadow: "0 10px 20px 2px #BDBDBD3B",
+            },
+
             screens: {
                 s340: "340px",
                 s440: "440px",
