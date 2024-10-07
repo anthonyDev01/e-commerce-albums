@@ -7,6 +7,8 @@ import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import MyDiscs from "./pages/MyDiscs";
+import Wallet from "./pages/Wallet";
 
 function App() {
     return (
@@ -22,6 +24,8 @@ function App() {
 
                         <Route element={<ProtectedRoute />}>
                             <Route path="/dashboard" element={<Dashboard />} />
+                            <Route path="/myDiscs" element={<MyDiscs />} />
+                            <Route path="/wallet" element={<Wallet />} />
                         </Route>
                     </Routes>
                 </AuthProvider>

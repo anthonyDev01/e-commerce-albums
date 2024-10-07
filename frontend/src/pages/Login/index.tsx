@@ -8,9 +8,14 @@ import { api, getHeaders } from "../../services/apiService";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
+import ErrorLabel from "../../components/ErrorLabel";
 
 const Login = () => {
-    const { register, handleSubmit } = useForm<User>();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<User>();
     const [loading, setLoading] = useState<boolean>(false);
     const { login } = useAuth();
 
@@ -28,15 +33,16 @@ const Login = () => {
                 toast.dismiss(toastId);
                 toast.success("Login feito com sucesso!");
                 setTimeout(() => {
-                    login(response.data.token);
+                    login(response.data);
                     setLoading(false);
                 }, 2500);
             })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
+            .catch(() => {
                 toast.dismiss(toastId);
-                toast.error("Algo deu errado!");
+                toast.error("Email ou senha inválido!");
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2500);
             });
     };
 
@@ -45,18 +51,36 @@ const Login = () => {
             <div className="w-screen h-screen backdrop-blur-[20px] flex items-center justify-center">
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="bg-[#FCFCFC] w-11/12 h-[522px] flex items-center justify-center flex-col gap-8 rounded-3xl s640:w-[544px]"
+                    className="bg-[#FCFCFC] w-11/12 s640:h-[522px]  flex items-center justify-center flex-col gap-8 rounded-3xl s640:w-[544px]"
                 >
                     <Logo />
                     <h2 className="font-bold text-xl s640:text-[32px]">
                         Acesse sua conta
                     </h2>
-                    <Input {...register("email")} type="email" required>
-                        Email
-                    </Input>
-                    <Input {...register("password")} type="password" required>
-                        Password
-                    </Input>
+                    <div className="w-full flex flex-col items-center justify-center">
+                        <Input
+                            id="email"
+                            {...register("email", { required: true })}
+                            type="email"
+                        >
+                            Email
+                        </Input>
+                        <ErrorLabel fieldError={errors?.email} />
+                    </div>
+                    <div className="w-full flex flex-col items-center justify-center">
+                        <Input
+                            id="password"
+                            {...register("password", {
+                                required: true,
+                                minLength: 8,
+                            })}
+                            type="password"
+                        >
+                            Password
+                        </Input>
+                        <ErrorLabel fieldError={errors?.password} />
+                    </div>
+
                     <div className="w-11/12 h-14 s640:w-[400px]">
                         <Button
                             disabled={loading}

@@ -13,6 +13,8 @@ export default {
                     "linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(./src/assets/bg-1.jpg)",
                 "background-dashboard":
                     "linear-gradient(180deg, rgba(25,24,31,0) 0%, rgba(25,24,31,1) 97%), url(./src/assets/banner-bg.jpg)",
+                "background-title":
+                    "background: linear-gradient(180deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(<path-to-image>) lightgray 50% / cover no-repeat;",
             },
 
             fontFamily: {

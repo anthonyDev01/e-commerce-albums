@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Button from "../Button";
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import avatar from "./assets/avatar.svg";
 
@@ -9,7 +9,12 @@ interface LoginToggleProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 const LoginToggle = ({ openMenu }: LoginToggleProps) => {
-    const { token } = useAuth();
+    const { token, logout } = useAuth();
+    const [openButton, setOpenButton] = useState<boolean>(false);
+
+    const handleButton = () => {
+        setOpenButton(!openButton);
+    };
 
     return (
         <div
@@ -28,14 +33,29 @@ const LoginToggle = ({ openMenu }: LoginToggleProps) => {
                 </>
             ) : (
                 <div className="w-full flex justify-around items-center">
-                    <a href="" className="text-white">
+                    <Link to="/MyDiscs" className="text-white">
                         Meus Discos
-                    </a>
-                    <a href="" className="text-white">
+                    </Link>
+                    <Link to="/wallet" className="text-white">
                         Carteira
-                    </a>
+                    </Link>
 
-                    <img src={avatar} alt="" />
+                    <div className="relative flex justify-center items-center">
+                        <img
+                            onClick={handleButton}
+                            className="cursor-pointer"
+                            src={avatar}
+                            alt=""
+                        />
+                        {openButton && (
+                            <div
+                                onClick={logout}
+                                className="absolute text-white w-24 -bottom-10 cursor-pointer bg-red-500 flex justify-center items-center rounded-lg"
+                            >
+                                Sair
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
         </div>

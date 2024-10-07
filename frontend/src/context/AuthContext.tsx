@@ -1,6 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthResponse } from "../models/User";
 
 interface AuthContextProps {
     children: ReactNode;
@@ -8,7 +9,8 @@ interface AuthContextProps {
 
 interface AuthContextType {
     token: string | null;
-    login: (token: string) => void;
+    userId: string | null;
+    login: (data: AuthResponse) => void;
     logout: () => void;
 }
 
@@ -24,6 +26,9 @@ const AuthProvider = ({ children }: AuthContextProps) => {
     const [token, setToken] = useState<string | null>(
         localStorage.getItem("token")
     );
+    const [userId, setUserId] = useState<string | null>(
+        localStorage.getItem("user_id")
+    );
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,27 +39,30 @@ const AuthProvider = ({ children }: AuthContextProps) => {
                 if (decodedToken.exp * 1000 < Date.now()) {
                     logout();
                 }
-            } catch (error) {
+            } catch {
                 logout();
             }
         }
-    }, []);
+    }, [token]);
 
-    const login = (token: string) => {
-        localStorage.setItem("token", token);
-        setToken(token);
-
+    const login = (data: AuthResponse) => {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user_id", data.id);
+        setToken(data.token);
+        setUserId(data.id);
         navigate("/dashboard");
     };
 
     const logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user_id");
         setToken(null);
+        setUserId(null);
         navigate("/login");
     };
 
     return (
-        <AuthContext.Provider value={{ token, login, logout }}>
+        <AuthContext.Provider value={{ token, userId, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

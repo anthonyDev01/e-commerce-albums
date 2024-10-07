@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListAlbums from "../../components/ListAlbums";
 import MainTitle from "../../components/MainTitle";
 import NavBar from "../../components/NavBar";
@@ -6,12 +6,18 @@ import searchIcon from "./assets/search.svg";
 import { Album } from "../../models/Album";
 import ModalAlbum from "../../components/ModalAlbum";
 import { api, getParamsSearch } from "../../services/apiService";
+import AlbumsCarousel from "../../components/AlbumsCarousel";
 
 const Dashboard = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
-    const [search, setSearch] = useState<string>("");
+    const [search, setSearch] = useState<string>("Matue");
     const [dataAlbum, setDataAlbum] = useState<Album[]>([]);
     const [selectedAlbum, setSelectedAlbum] = useState<Album | undefined>();
+    const [showList, setShowList] = useState<boolean>(false);
+
+    useEffect(() => {
+        searchAlbum(search);
+    }, []);
 
     const handleModal = (album: Album) => {
         setOpenModal(!openModal);
@@ -26,9 +32,14 @@ const Dashboard = () => {
         setOpenModal(false);
     };
 
-    console.log(selectedAlbum);
+    const handleList = () => {
+        if (search.length > 0 && search !== "Matue") {
+            setShowList(!showList);
+        }
+    };
 
-    const searchAlbum = () => {
+    const searchAlbum = (search: string, e?: React.FormEvent) => {
+        e?.preventDefault();
         if (search.length > 0) {
             api.get<Album[]>("albums/all", getParamsSearch(search))
                 .then((response) => {
@@ -38,6 +49,7 @@ const Dashboard = () => {
                     console.log(error);
                 });
         }
+        handleList();
     };
 
     return (
@@ -52,22 +64,33 @@ const Dashboard = () => {
                 </div>
 
                 <div className="w-full flex justify-center items-center h-[56px] mb-4">
-                    <div className="flex items-center justify-around h-full w-11/12 max-w-[448px] rounded-xl overflow-hidden ring-1 ring-[#CBCAD7]">
+                    <form
+                        onSubmit={(e) => searchAlbum(search, e)}
+                        className="flex items-center justify-around h-full w-11/12 max-w-[448px] rounded-xl overflow-hidden ring-1 ring-[#CBCAD7]"
+                    >
                         <input
                             className="w-10/12 h-full bg-transparent outline-none text-white"
                             type="text"
                             onChange={handleInputChange}
                         />
-                        <img
-                            src={searchIcon}
-                            onClick={searchAlbum}
-                            alt=""
-                            className="mr-2 cursor-pointer"
-                        />
-                    </div>
+                        <button type="submit">
+                            <img
+                                src={searchIcon}
+                                alt=""
+                                className="mr-2 cursor-pointer"
+                            />
+                        </button>
+                    </form>
                 </div>
 
-                <ListAlbums onClick={handleModal} dataAlbum={dataAlbum} />
+                {showList ? (
+                    <ListAlbums onClick={handleModal} dataAlbum={dataAlbum} />
+                ) : (
+                    <AlbumsCarousel
+                        onClick={handleModal}
+                        dataAlbum={dataAlbum}
+                    />
+                )}
 
                 {openModal && (
                     <ModalAlbum

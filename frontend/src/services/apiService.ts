@@ -27,6 +27,7 @@ export function getAuthorization() {
 
     return {
         headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
     };

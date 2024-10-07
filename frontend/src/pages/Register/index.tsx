@@ -7,9 +7,14 @@ import { SignUpResponse, User } from "../../models/User";
 import { api, getHeaders } from "../../services/apiService";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import ErrorLabel from "../../components/ErrorLabel";
 
 const Register = () => {
-    const { register, handleSubmit } = useForm<User>();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<User>();
     const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate();
 
@@ -34,7 +39,12 @@ const Register = () => {
             .catch((error) => {
                 console.log(error);
                 toast.dismiss(toastId);
-                toast.error("Algo deu errado!");
+
+                const errorMessage = error.response.data.message;
+                if (errorMessage == "User already exists")
+                    toast.error("Usuario já existe!");
+                else toast.error("Email ou senha inválidos!");
+
                 setTimeout(() => {
                     setLoading(false);
                 }, 2500);
@@ -52,17 +62,41 @@ const Register = () => {
                     Criar conta
                 </h2>
 
-                <Input {...register("name")} type="text">
-                    Nome Completo
-                </Input>
+                <div className="w-full flex flex-col items-center justify-center">
+                    <Input
+                        id="name"
+                        {...register("name", { required: true, minLength: 3 })}
+                        type="text"
+                    >
+                        Nome Completo
+                    </Input>
+                    <ErrorLabel fieldError={errors?.name} />
+                </div>
 
-                <Input {...register("email")} type="email">
-                    Email
-                </Input>
+                <div className="w-full flex flex-col items-center justify-center">
+                    <Input
+                        id="email"
+                        {...register("email", { required: true })}
+                        type="email"
+                    >
+                        Email
+                    </Input>
+                    <ErrorLabel fieldError={errors?.email} />
+                </div>
 
-                <Input {...register("password")} type="password">
-                    Password
-                </Input>
+                <div className="w-full flex flex-col items-center justify-center">
+                    <Input
+                        id="password"
+                        {...register("password", {
+                            required: true,
+                            minLength: 8,
+                        })}
+                        type="password"
+                    >
+                        Password
+                    </Input>
+                    <ErrorLabel fieldError={errors?.password} />
+                </div>
 
                 <div className="w-11/12 h-14 s640:w-[400px]">
                     <Button

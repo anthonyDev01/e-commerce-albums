@@ -15,7 +15,7 @@ const Button = ({ className, children, disabled, ...rest }: ButtonProps) => {
                 disabled ? "cursor-not-allowed" : "cursor-pointer"
             }`}
         >
-            <span>{children}</span>
+            {children}
         </button>
     );
 };
