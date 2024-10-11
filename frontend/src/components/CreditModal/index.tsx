@@ -21,12 +21,12 @@ const CreditModal = ({ onClick, walletId }: CreditModalProps) => {
 
     const addBalance = () => {
         if (Number(credit) > 0) {
-            console.log(Number(credit));
+            console.log(walletId);
 
             api.post<WalletReponse>(
                 "/wallet/credit",
                 {
-                    credit: Number(credit),
+                    balance: Number(credit),
                     wallet_id: walletId,
                 },
                 getAuthorization()
@@ -34,6 +34,9 @@ const CreditModal = ({ onClick, walletId }: CreditModalProps) => {
                 .then((response) => {
                     console.log(response.data);
                     toast.success("Credito adicionado com sucesso!");
+                    if (onClick) {
+                        onClick();
+                    }
                 })
                 .catch((error) => {
                     console.log(error);

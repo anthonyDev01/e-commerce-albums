@@ -10,7 +10,7 @@ import AlbumsCarousel from "../../components/AlbumsCarousel";
 
 const Dashboard = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
-    const [search, setSearch] = useState<string>("Matue");
+    const [search, setSearch] = useState<string>("2pac.");
     const [dataAlbum, setDataAlbum] = useState<Album[]>([]);
     const [selectedAlbum, setSelectedAlbum] = useState<Album | undefined>();
     const [showList, setShowList] = useState<boolean>(false);
@@ -33,8 +33,10 @@ const Dashboard = () => {
     };
 
     const handleList = () => {
-        if (search.length > 0 && search !== "Matue") {
-            setShowList(!showList);
+        if (search.length > 0 && search !== "2pac.") {
+            setShowList(true);
+        } else {
+            setShowList(false);
         }
     };
 
@@ -48,8 +50,8 @@ const Dashboard = () => {
                 .catch((error) => {
                     console.log(error);
                 });
+            handleList();
         }
-        handleList();
     };
 
     return (

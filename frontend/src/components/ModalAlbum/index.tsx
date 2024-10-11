@@ -48,8 +48,10 @@ const ModalAlbum = ({ selectedAlbum, onClick }: ModalAlbumProps) => {
             JSON.stringify(updatedSelectedAlbum),
             getAuthorization()
         )
-            .then(() => {
+            .then((response) => {
                 toast.dismiss(toastId);
+                console.log(response.data);
+                
                 toast.success("Album comprado com sucesso");
             })
             .catch((error) => {

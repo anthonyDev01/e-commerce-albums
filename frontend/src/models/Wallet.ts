@@ -1,5 +1,5 @@
 export interface WalletReponse {
-    id?: string;
+    wallet_id?: string;
     balance?: number;
     points?: number;
     last_update?: string;

@@ -23,9 +23,14 @@ const Wallet = () => {
             api.get(
                 `/transactions/users/transactions/${userId}`,
                 getAuthorization()
-            ).then((response) => {
-                setTransactions(response.data);
-            });
+            )
+                .then((response) => {
+                    setTransactions(response.data);
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                });
         };
 
         const fechWalletId = () => {
@@ -51,7 +56,7 @@ const Wallet = () => {
         fechWalletId();
 
         fechTransactions();
-    }, [wallet]);
+    }, [openModal]);
 
     const handleOpenModal = () => {
         setOpenModal(!openModal);
@@ -60,6 +65,8 @@ const Wallet = () => {
     const handleOpenTransaction = (transaction: Transaction | undefined) => {
         setOpenTransaction(!openTransaction);
         setTransaction(transaction);
+        console.log(transaction);
+        
     };
 
     return (
@@ -95,7 +102,7 @@ const Wallet = () => {
                 {openModal && (
                     <CreditModal
                         onClick={handleOpenModal}
-                        walletId={wallet?.id}
+                        walletId={wallet?.wallet_id}
                     />
                 )}
 

@@ -24,6 +24,8 @@ const MyDiscs = () => {
             )
                 .then((response) => {
                     setAlbums(response.data);
+                    console.log(response.data);
+                    
                     calculateInvestedValue(response.data);
                     calculeteAmountAlbum(response.data);
                 })
