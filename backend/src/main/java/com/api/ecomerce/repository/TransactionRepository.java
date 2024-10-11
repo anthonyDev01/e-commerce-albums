@@ -1,6 +1,7 @@
 package com.api.ecomerce.repository;
 
 import com.api.ecomerce.model.Transaction;
+import com.api.ecomerce.model.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, UUID> {
 
-
+    List<Transaction> findAllByUserId(UUID userId);
 
     @Query("SELECT COALESCE(SUM(t.value), 0) From Transaction t WHERE t.createdAt BETWEEN :startOfDay AND :endOfDay")
     BigDecimal calculateTotalSalesOfTheDay(LocalDateTime startOfDay, LocalDateTime endOfDay);

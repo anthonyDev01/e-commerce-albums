@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Log4j2
@@ -40,6 +41,8 @@ public class WalletService {
         log.info("Fetching wallet with id: " + id);
         return this.walletRepository.findById(id).orElseThrow(() -> new WalletNotFoundException("Wallet not found"));
     }
+
+
 
     public Wallet addBalance (WalletAddBalanceRequestDto request){
         User user = authService.getAuthenticatedUser();

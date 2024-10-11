@@ -6,6 +6,7 @@ import com.api.ecomerce.dto.response.TransactionUserMetricsResponse;
 import com.api.ecomerce.model.Album;
 import com.api.ecomerce.model.Transaction;
 import com.api.ecomerce.model.User;
+import com.api.ecomerce.model.Wallet;
 import com.api.ecomerce.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @Service
@@ -37,6 +39,11 @@ public class TransactionService {
 
         log.info("Transaction created successfully");
         return this.transactionRepository.save(transaction);
+    }
+
+    public List<Transaction> findAllUserTransaction(UUID id){
+        log.info("Fetching wallets with id: " + id);
+        return this.transactionRepository.findAllByUserId(id);
     }
 
 
