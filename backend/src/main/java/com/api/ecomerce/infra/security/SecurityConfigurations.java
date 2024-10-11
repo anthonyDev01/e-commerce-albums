@@ -21,7 +21,6 @@ public class SecurityConfigurations   {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth.requestMatchers("/v3/api-docs/**",
                                         "/v2/api-docs.yaml",

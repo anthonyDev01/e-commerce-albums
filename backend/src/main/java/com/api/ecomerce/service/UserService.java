@@ -3,6 +3,7 @@ package com.api.ecomerce.service;
 import com.api.ecomerce.dto.request.LoginUserRequestDto;
 import com.api.ecomerce.dto.request.SignUpRequestDto;
 import com.api.ecomerce.dto.request.UpdateUserRequestDto;
+import com.api.ecomerce.dto.response.LoginResponseDto;
 import com.api.ecomerce.infra.exception.InvalidCredentialException;
 import com.api.ecomerce.infra.exception.UserAlreadyExistsException;
 import com.api.ecomerce.infra.exception.UserNotFoundException;
@@ -59,7 +60,7 @@ public class UserService implements UserDetailsService {
         return this.userRepository.save(newUser);
     }
 
-    public String auth(LoginUserRequestDto request) throws InvalidCredentialException, UserNotFoundException {
+    public LoginResponseDto auth(LoginUserRequestDto request) throws InvalidCredentialException, UserNotFoundException {
         log.info("Attempting to authenticate a user");
         User user = this.userRepository.findByEmail(request.getEmail()).orElseThrow(() -> {
             log.error("User with email: {} not found", request.getEmail());
@@ -70,7 +71,8 @@ public class UserService implements UserDetailsService {
             throw new InvalidCredentialException("Invalid credentials");
         }
         log.info("User authenticated successfully");
-        return this.tokenService.generateToken(user);
+        String token = tokenService.generateToken(user);
+        return new LoginResponseDto(token, user.getId());
     }
 
     public List<User> listAllUsers(){

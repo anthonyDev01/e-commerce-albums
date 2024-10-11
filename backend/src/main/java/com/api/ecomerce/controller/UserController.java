@@ -26,21 +26,19 @@ import java.util.UUID;
 public class UserController implements UserDocumentation {
 
     private final UserService userService;
-    private final TokenService tokenService;
 
     @Override
     @PostMapping("/signUp")
     public ResponseEntity<SignUpResponseDto> singUpUser(@Valid @RequestBody SignUpRequestDto body){
         User user = this.userService.saveUser(body);
-        String token = tokenService.generateToken(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new SignUpResponseDto(user.getId(), token));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new SignUpResponseDto(user));
     }
 
     @Override
     @PostMapping("/auth")
     public ResponseEntity<LoginResponseDto> authUser(@Valid @RequestBody LoginUserRequestDto body) throws UserNotFoundException, InvalidCredentialException {
-        String token = this.userService.auth(body);
-        return ResponseEntity.ok(new LoginResponseDto(token));
+        LoginResponseDto response = this.userService.auth(body);
+        return ResponseEntity.ok(response);
     }
 
     @Override
