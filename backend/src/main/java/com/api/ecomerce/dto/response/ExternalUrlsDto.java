@@ -10,5 +10,5 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExternalUrlsDto {
-    private Map<String, String> externalUrls;
+    private String spotify;
 }

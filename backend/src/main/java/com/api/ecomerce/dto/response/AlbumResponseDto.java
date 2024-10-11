@@ -29,7 +29,7 @@ public class AlbumResponseDto {
     private String idSpotify;
     private List<ArtistSimplifiedDto> artistName;
     private List<ImageDto> images;
-    private ExternalUrlsDto spotifyUrl;
+    private ExternalUrlsWrapperDto spotifyUrl;
     private BigDecimal value;
 
 

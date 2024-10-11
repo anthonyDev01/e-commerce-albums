@@ -1,8 +1,5 @@
 package com.api.ecomerce.mapper;
-import com.api.ecomerce.dto.response.AlbumResponseDto;
-import com.api.ecomerce.dto.response.ArtistSimplifiedDto;
-import com.api.ecomerce.dto.response.ExternalUrlsDto;
-import com.api.ecomerce.dto.response.ImageDto;
+import com.api.ecomerce.dto.response.*;
 import com.api.ecomerce.model.Album;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +19,7 @@ public class MapperAlbum {
                 .name(album.getName())
                 .artistName(mapArtists(album.getArtistName()))
                 .images(mapImage(album.getImageUrl()))
+                .spotifyUrl(mapExternalUrl(album.getSpotifyUrl()))
                 .build();
     }
 
@@ -42,7 +40,7 @@ public class MapperAlbum {
         try {
             ArtistSimplified[] artists = objectMapper.readValue(artistsJson, ArtistSimplified[].class);
             return Arrays.stream(artists)
-                    .map(artist -> new ArtistSimplifiedDto(artist.getId(), artist.getName(), artist.getHref(), artist.getUri(), artist.getType().getType()))
+                    .map(artist -> new ArtistSimplifiedDto(artist.getHref(), artist.getId(), artist.getName() , artist.getType().getType(), artist.getUri()))
                     .collect(Collectors.toList());
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Error processing artistName JSON", e);
@@ -60,10 +58,9 @@ public class MapperAlbum {
         }
     }
 
-    private static ExternalUrlsDto mapExternalUrl(String externalUrlJson) {
+    private static ExternalUrlsWrapperDto mapExternalUrl(String externalUrlJson) {
         try {
-            Map<String, String> externalUrlsMap = objectMapper.readValue(externalUrlJson, Map.class);
-            return new ExternalUrlsDto(externalUrlsMap);
+            return objectMapper.readValue(externalUrlJson, ExternalUrlsWrapperDto.class);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Erro ao processar o JSON de spotifyUrl", e);
         }

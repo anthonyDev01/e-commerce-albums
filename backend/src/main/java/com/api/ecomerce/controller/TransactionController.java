@@ -3,6 +3,7 @@ package com.api.ecomerce.controller;
 import com.api.ecomerce.documentation.TransactionDocumentation;
 import com.api.ecomerce.dto.response.TransactionAlbumResponseDto;
 import com.api.ecomerce.dto.response.TransactionMetricsResponseDto;
+import com.api.ecomerce.dto.response.TransactionResponseDto;
 import com.api.ecomerce.dto.response.TransactionUserMetricsResponse;
 import com.api.ecomerce.model.Transaction;
 import com.api.ecomerce.service.TransactionService;
@@ -33,8 +34,9 @@ public class TransactionController implements TransactionDocumentation {
 
 
     @GetMapping("/users/transactions/{userId}")
-    public ResponseEntity<List<Transaction>> getAllTransactionsByUserId(@PathVariable UUID userId){
-        return ResponseEntity.ok(transactionService.findAllUserTransaction(userId));
+    public ResponseEntity<List<TransactionResponseDto>> getAllTransactionsByUserId(@PathVariable UUID userId){
+        List<TransactionResponseDto> transactionResponseDto = TransactionResponseDto.toListTransactions(transactionService.findAllUserTransaction(userId));
+        return ResponseEntity.ok(transactionResponseDto);
     }
 
 
