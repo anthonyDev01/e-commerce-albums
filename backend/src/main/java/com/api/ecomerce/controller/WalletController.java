@@ -30,7 +30,7 @@ public class WalletController implements WalletDocumentation {
 
     @Override
     @PostMapping("/credit")
-    public ResponseEntity<WalletBalanceResponseDto> addCreditToWallet(@Valid @RequestBody WalletAddBalanceRequestDto body){
+    public ResponseEntity<WalletBalanceResponseDto> addCreditToWallet(@Valid @RequestBody WalletAddBalanceRequestDto body) throws WalletNotFoundException {
         Wallet wallet = this.walletService.addBalance(body);
         return ResponseEntity.ok(new WalletBalanceResponseDto(wallet));
     }

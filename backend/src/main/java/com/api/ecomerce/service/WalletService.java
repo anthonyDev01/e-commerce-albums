@@ -44,10 +44,10 @@ public class WalletService {
 
 
 
-    public Wallet addBalance (WalletAddBalanceRequestDto request){
-        User user = authService.getAuthenticatedUser();
+    public Wallet addBalance (WalletAddBalanceRequestDto request) throws WalletNotFoundException {
+        //User user = authService.getAuthenticatedUser();
 
-        Wallet wallet = user.getWallet();
+        Wallet wallet = findWalletById(request.getWallet_id());
         log.info("Attempting to add credit to the wallet with id: " + wallet.getId());
 
         BigDecimal newBalance = wallet.getBalance().add(request.getBalance());

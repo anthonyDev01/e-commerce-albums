@@ -67,6 +67,6 @@ public interface WalletDocumentation {
                     ),
             }
     )
-    public ResponseEntity<WalletBalanceResponseDto> addCreditToWallet(@Valid @RequestBody WalletAddBalanceRequestDto body);
+    public ResponseEntity<WalletBalanceResponseDto> addCreditToWallet(@Valid @RequestBody WalletAddBalanceRequestDto body) throws WalletNotFoundException;
 
 }

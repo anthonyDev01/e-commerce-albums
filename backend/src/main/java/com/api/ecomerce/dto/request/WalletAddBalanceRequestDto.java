@@ -20,4 +20,7 @@ public class WalletAddBalanceRequestDto {
     @NotNull(message = "The 'balance' field must not be null")
     @DecimalMin(value = "0.01", inclusive = true, message = "Balance must be greater than zero")
     private BigDecimal balance;
+
+
+    private UUID wallet_id;
 }
