@@ -5,9 +5,11 @@ import com.api.ecomerce.dto.request.AlbumRequestDto;
 import com.api.ecomerce.dto.response.AlbumResponseDto;
 import com.api.ecomerce.dto.response.AlbumsSpotifyResponseDto;
 import com.api.ecomerce.infra.exception.*;
+import com.api.ecomerce.mapper.MapperAlbum;
 import com.api.ecomerce.model.Album;
 import com.api.ecomerce.service.AlbumService;
 import com.api.ecomerce.service.integration.SpotifyApiClient;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,15 +35,16 @@ public class AlbumController implements AlbumDocumentation {
     @GetMapping("/my-collection/{userId}")
     public ResponseEntity<List<AlbumResponseDto>> getAllAlbumFromUserCollection(@PathVariable UUID userId) throws UserNotFoundException, AlbumNotFoundException {
         List<Album> albums = albumService.getAllAlbumsFromUserCollection(userId);
-        List<AlbumResponseDto> albumResponseDtos = new AlbumResponseDto().fromAlbumList(albums);
+        List<AlbumResponseDto> albumResponseDtos = MapperAlbum.fromAlbumList(albums);
         return ResponseEntity.ok(albumResponseDtos);
     }
 
     @Override
     @PostMapping("/sale")
-    public ResponseEntity<AlbumResponseDto> buyAlbum(@Valid @RequestBody AlbumRequestDto body) throws BalanceIsInsufficientException, AlbumAlreadyPurchasedException, UserNotFoundException, WalletNotFoundException {
+    public ResponseEntity<AlbumResponseDto> buyAlbum(@Valid @RequestBody AlbumRequestDto body) throws BalanceIsInsufficientException, AlbumAlreadyPurchasedException, UserNotFoundException, WalletNotFoundException, JsonProcessingException {
         Album album = this.albumService.buyAlbum(body);
-        return ResponseEntity.ok(new AlbumResponseDto(album));
+        AlbumResponseDto albumDto = MapperAlbum.toDto(album);
+        return ResponseEntity.ok(albumDto);
     }
 
     @Override

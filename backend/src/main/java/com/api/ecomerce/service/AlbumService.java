@@ -1,20 +1,27 @@
 package com.api.ecomerce.service;
 import com.api.ecomerce.dto.request.AlbumRequestDto;
+import com.api.ecomerce.dto.response.AlbumsSpotifyResponseDto;
+import com.api.ecomerce.dto.response.ArtistSimplifiedDto;
 import com.api.ecomerce.infra.exception.*;
 import com.api.ecomerce.model.Album;
 import com.api.ecomerce.model.Transaction;
 import com.api.ecomerce.model.User;
 import com.api.ecomerce.repository.AlbumRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -25,20 +32,22 @@ public class AlbumService {
     private final WalletService walletService;
     private final TransactionService transactionService;
     private final AuthService authService;
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public Album buyAlbum(AlbumRequestDto request) throws BalanceIsInsufficientException, AlbumAlreadyPurchasedException, UserNotFoundException, WalletNotFoundException {
-        log.info("Attempting buy a album with idSpotify: " + request.getIdSpotify());
+    public Album buyAlbum(AlbumRequestDto request) throws BalanceIsInsufficientException, AlbumAlreadyPurchasedException, UserNotFoundException, WalletNotFoundException, JsonProcessingException {
+        log.info("Attempting buy a album with idSpotify: " + request.getAlbum().getId());
 
-        User user = authService.getAuthenticatedUser();
-
-        checkIfIdSpotifyAlreadyPurchasedByUser(request.getIdSpotify(), user.getId());
+        User user = userService.findUserById(request.getUser_id());
+        checkIfIdSpotifyAlreadyPurchasedByUser(request.getAlbum().getId(), user.getId());
 
         Album album = Album.builder()
-                .name(request.getName())
-                .idSpotify(request.getIdSpotify())
-                .artistName(request.getArtistName())
-                .imageUrl(request.getImageUrl())
-                .spotifyUrl(request.getSpotifyUrl())
+                .name(request.getAlbum().getName())
+                .idSpotify(request.getAlbum().getId())
+                .artistName(convertToJson(request.getAlbum().getArtists()))
+                .imageUrl(convertToJson(request.getAlbum().getImages()))
+                .spotifyUrl(convertToJson(request.getAlbum().getExternalUrls()))
+                .imageUrl(objectMapper.writeValueAsString(request.getAlbum().getImages()))
+                .spotifyUrl(objectMapper.writeValueAsString(request.getAlbum().getExternalUrls()))
                 .value(BigDecimal.valueOf(Math.random() * ((100.00 - 12.00) + 1) + 12.00).setScale(2, RoundingMode.UP))
                 .build();
 
@@ -96,5 +105,15 @@ public class AlbumService {
             throw new BalanceIsInsufficientException("The balance is insufficient");
         }
     }
+
+    private String convertToJson(Object obj) {
+        try {
+            return objectMapper.writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Error converting object to JSON", e);
+        }
+    }
+
+
 
 }

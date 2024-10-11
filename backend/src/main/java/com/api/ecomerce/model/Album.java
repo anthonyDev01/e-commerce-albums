@@ -4,6 +4,9 @@ package com.api.ecomerce.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
+import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
+import se.michaelthelin.spotify.model_objects.specification.ExternalUrl;
+import se.michaelthelin.spotify.model_objects.specification.Image;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,19 +25,19 @@ public class Album {
     @Column(name = "id", updatable = true)
     private UUID id;
 
-    @Column(name = "name", nullable = false, length = 60)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "idSpotify", nullable = false)
     private String idSpotify;
 
-    @Column(name = "artistName", nullable = false, length = 100)
+    @Column(name = "artistName", nullable = false, columnDefinition = "TEXT")
     private String artistName;
 
-    @Column(name = "imageUrl", nullable = false)
+    @Column(name = "imageUrl", nullable = false, columnDefinition = "TEXT")
     private String imageUrl;
 
-    @Column(name = "spotifyUrl", nullable = false)
+    @Column(name = "spotifyUrl", nullable = false, columnDefinition = "TEXT")
     private String spotifyUrl;
 
     @Column(name = "value", nullable = false)

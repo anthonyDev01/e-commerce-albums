@@ -6,6 +6,7 @@ import com.api.ecomerce.dto.request.SignUpRequestDto;
 import com.api.ecomerce.dto.request.UpdateUserRequestDto;
 import com.api.ecomerce.dto.response.*;
 import com.api.ecomerce.infra.exception.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -128,7 +129,7 @@ public interface AlbumDocumentation {
 
             }
     )
-    public ResponseEntity<AlbumResponseDto> buyAlbum(@Valid @RequestBody AlbumRequestDto body) throws BalanceIsInsufficientException, AlbumAlreadyPurchasedException, UserNotFoundException, WalletNotFoundException;
+    public ResponseEntity<AlbumResponseDto> buyAlbum(@Valid @RequestBody AlbumRequestDto body) throws BalanceIsInsufficientException, AlbumAlreadyPurchasedException, UserNotFoundException, WalletNotFoundException, JsonProcessingException;
 
 
     @Operation(summary = "Delete album from my collection")
