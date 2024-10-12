@@ -5,6 +5,7 @@ WORKDIR /app
 COPY . .
 
 RUN mvn clean package -Dmaven.test.skip=true
+RUN ls target/
 
 COPY target/*.jar app.jar
 
