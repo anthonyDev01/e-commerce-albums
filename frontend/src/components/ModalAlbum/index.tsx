@@ -51,7 +51,7 @@ const ModalAlbum = ({ selectedAlbum, onClick }: ModalAlbumProps) => {
             .then((response) => {
                 toast.dismiss(toastId);
                 console.log(response.data);
-                
+
                 toast.success("Album comprado com sucesso");
             })
             .catch((error) => {
@@ -79,15 +79,15 @@ const ModalAlbum = ({ selectedAlbum, onClick }: ModalAlbumProps) => {
 
     return (
         <DarkBackGround>
-            <div className="relative bg-white flex justify-center items-center w-[607px] h-[306.74px] rounded-[20px] overflow-hidden z-50">
+            <div className="relative w-full h-2/4 bg-white flex justify-around items-center overflow-hidden z-50 s640:rounded-[20px] s640:justify-center s640:w-[607px] s640:h-[306.74px] ">
                 <div
-                    className="h-full w-2/4 bg-cover bg-center bg-no-repeat"
+                    className=" w-[100px] h-[100px]  bg-cover bg-center bg-no-repeat s640:w-2/4 s640:h-full"
                     style={{
                         backgroundImage: `url(${selectedAlbum?.images[0].url})`,
                     }}
                 ></div>
 
-                <div className="h-full w-2/4 flex flex-col justify-around items-center">
+                <div className="h-full w-3/5 flex flex-col justify-center gap-2 items-center s640:w-2/4">
                     <h3 className="font-bold text-xl">{selectedAlbum?.name}</h3>
 
                     <div className="flex flex-col w-3/4 gap-3 text-sm ">
@@ -108,7 +108,7 @@ const ModalAlbum = ({ selectedAlbum, onClick }: ModalAlbumProps) => {
                             </span>
                         </div>
                     </div>
-                    <div className="w-[258.85px] h-[41.42px]">
+                    <div className="absolute bottom-4 right-[9%] w-10/12 h-[41.42px]  s640:w-[258.85px] s640:static">
                         <Button
                             className="bg-[#FBBC05] text-white s740:text-[22px]"
                             onClick={buyAlbum}

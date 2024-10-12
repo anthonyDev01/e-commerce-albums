@@ -51,7 +51,7 @@ const Login = () => {
             <div className="w-screen h-screen backdrop-blur-[20px] flex items-center justify-center">
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="bg-[#FCFCFC] w-11/12 s640:h-[522px]  flex items-center justify-center flex-col gap-8 rounded-3xl s640:w-[544px]"
+                    className="bg-[#FCFCFC] w-full h-full s640:h-[522px]  flex items-center justify-center flex-col gap-8 s640:rounded-3xl s640:w-[544px]"
                 >
                     <Logo />
                     <h2 className="font-bold text-xl s640:text-[32px]">

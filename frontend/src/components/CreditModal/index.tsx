@@ -49,7 +49,7 @@ const CreditModal = ({ onClick, walletId }: CreditModalProps) => {
 
     return (
         <DarkBackGround>
-            <div className="relative flex flex-col justify-around items-center gap-3 h-[306px] bg-white rounded-[20px]">
+            <div className="relative w-full flex flex-col justify-around items-center gap-3 h-[306px] bg-white s540:rounded-[20px] s540:w-[400px]">
                 <h2 className="text-xl font-semibold">Adicionar Credito</h2>
                 <div className="w-10/12 flex justify-center items-center">
                     <Input type="number" onChange={handleCredit}>

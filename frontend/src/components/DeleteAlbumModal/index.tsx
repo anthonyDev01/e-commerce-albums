@@ -36,7 +36,7 @@ const DeleteAlbumModal = ({ album, onClick }: DeleteAlbumModalProps) => {
 
     return (
         <DarkBackGround>
-            <div className="relative flex flex-col justify-around items-center w-1/3 max-w-[500px] bg-white h-[306px] rounded-[20px]">
+            <div className="relative flex flex-col justify-around items-center w-full max-w-[500px] bg-white h-[306px] s440:rounded-[20px]">
                 <h2 className="text-xl font-bold">Deletar Album</h2>
                 <h3 className="text-lg font-semibold">{album?.name}</h3>
 

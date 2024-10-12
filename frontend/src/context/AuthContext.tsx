@@ -58,7 +58,7 @@ const AuthProvider = ({ children }: AuthContextProps) => {
         localStorage.removeItem("user_id");
         setToken(null);
         setUserId(null);
-        navigate("/login");
+        navigate("/");
     };
 
     return (

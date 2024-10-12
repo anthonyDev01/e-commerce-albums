@@ -14,7 +14,7 @@ const Home = () => {
                         tempos no Vinil.
                     </h2>
 
-                    <div className="w-[269px] h-16 ">
+                    <div className=" w-[240px] s640:w-[269px] h-16 ">
                         <Button className="bg-sysmap_ligth text-black text-xl">
                             Inscrever-se
                         </Button>

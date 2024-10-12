@@ -73,9 +73,9 @@ const Wallet = () => {
         <>
             <NavBar />
             <main className="w-full min-h-screen flex flex-col items-center gap-16 justify-center bg-[#19181F]">
-                <div className="flex flex-col justify-end min-h-[340px] gap-4 w-10/12 ">
+                <div className="flex flex-col justify-end items-center min-h-[340px] gap-4 w-10/12 s640:items-start">
                     <h2 className="text-white text-3xl">Minha Carteira</h2>
-                    <div className="flex flex-col gap-3 s640:flex-row">
+                    <div className="flex flex-col justify-center  gap-3 s640:flex-row">
                         <InfoAlbumCard TypeCard="total" label="Total de Pontos">
                             {wallet?.points}
                         </InfoAlbumCard>
@@ -89,7 +89,7 @@ const Wallet = () => {
                     </div>
                 </div>
 
-                <div className="w-2/6 h-[500px] flex flex-col py-5 justify-start items-center overflow-y-auto ">
+                <div className="w-10/12 h-[500px] flex flex-col py-5 justify-start items-center overflow-y-auto s640:w-3/6">
                     {transactions?.map((data) => (
                         <TransactionCard
                             key={data.id}

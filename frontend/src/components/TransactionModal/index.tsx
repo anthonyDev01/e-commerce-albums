@@ -38,7 +38,7 @@ const TransactionModal = ({ onClick, transaction }: TransactionModalProps) => {
 
     return (
         <DarkBackGround>
-            <div className="relative bg-white flex flex-col justify-center p-4 gap-5 h-[550px] w-1/3 rounded-[20px] shadow-black">
+            <div className="w-full h-9/12 relative bg-white flex flex-col justify-center p-4 gap-5 shadow-black s640:w-[520px] s640:h-[550px] s640:rounded-[20px]">
                 <h2 className="font-bold text-xl">{transaction?.album_name}</h2>
                 <h3 className="font-semibold text-lg text-gray-800 ">
                     Aritista: {transaction?.artist_name}

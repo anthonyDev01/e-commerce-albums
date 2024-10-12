@@ -11,7 +11,7 @@ interface AlbumsCarouselProps {
 }
 
 const AlbumsCarousel = ({ dataAlbum, onClick }: AlbumsCarouselProps) => {
-    const [slidePerView, setSlidePerView] = useState(4);
+    const [slidePerView, setSlidePerView] = useState(1);
 
     useEffect(() => {
         const handlResize = () => {

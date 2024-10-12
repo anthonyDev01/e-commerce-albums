@@ -25,7 +25,7 @@ const MyDiscs = () => {
                 .then((response) => {
                     setAlbums(response.data);
                     console.log(response.data);
-                    
+
                     calculateInvestedValue(response.data);
                     calculeteAmountAlbum(response.data);
                 })
@@ -69,10 +69,10 @@ const MyDiscs = () => {
     return (
         <>
             <NavBar />
-            <main className="w-full min-h-screen flex flex-col items-center justify-center gap-12 bg-[#19181F]">
+            <main className="w-full min-h-screen flex flex-col items-center justify-center gap-12 bg-[#19181F] ">
                 <div className="flex flex-col justify-center  min-h-[550px] gap-4 w-10/12  ">
                     <h2 className="text-white text-3xl">Meus Discos</h2>
-                    <div className="flex flex-col gap-3 s640:flex-row">
+                    <div className="flex flex-col items-center gap-3 s640:flex-row ">
                         <InfoAlbumCard TypeCard="total" label="Total de Albums">
                             {albumAmount}
                         </InfoAlbumCard>
@@ -84,7 +84,7 @@ const MyDiscs = () => {
 
                 <div className="w-10/12 flex justify-end">
                     <ListAlbums
-                        className="justify-start"
+                        className="justify-start "
                         dataAlbum={albums}
                         myAlbums={albums}
                         onClick={handleModal}

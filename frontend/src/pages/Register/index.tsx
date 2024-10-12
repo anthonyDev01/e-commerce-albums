@@ -55,7 +55,7 @@ const Register = () => {
         <main className="w-screen h-screen bg-[url('./assets/bg-1.jpg')] bg-cover bg-center flex items-center justify-center">
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="bg-[#FCFCFC] w-11/12 h-[623px] flex items-center justify-center flex-col gap-8 rounded-3xl s640:w-[544px]"
+                className="bg-[#FCFCFC] w-full h-full s640:h-[623px] flex items-center justify-center flex-col gap-8 s640:rounded-3xl s640:w-[544px]"
             >
                 <Logo />
                 <h2 className="font-bold text-xl s640:text-[32px]">
