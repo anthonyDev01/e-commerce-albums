@@ -60,15 +60,9 @@ const ModalAlbum = ({ selectedAlbum, onClick }: ModalAlbumProps) => {
 
                 const errorMessage = error.response?.data?.message;
 
-                if (
-                    errorMessage ===
-                    "The album entered already belongs to the user"
-                )
+                if (error.response.code === 409)
                     toast.error("Você já possui esse álbum!");
-                else if (
-                    errorMessage ===
-                    "Wallet does not have funds to complete the transaction!"
-                )
+                else if (errorMessage === "The balance is insufficient")
                     toast.error("Você não possui saldo suficiente!");
                 else
                     toast.error(
