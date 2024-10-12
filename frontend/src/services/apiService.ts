@@ -6,6 +6,9 @@ export const api = axios.create({
     //baseURL: "http://localhost:8080/api/",
 });
 
+console.log("API URL:", process.env.REACT_APP_API_URL);
+
+
 export function getHeaders() {
     return {
         headers: { "Content-Type": "application/json" },
