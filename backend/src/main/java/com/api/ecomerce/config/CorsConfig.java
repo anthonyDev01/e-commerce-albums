@@ -13,10 +13,13 @@ import java.util.Arrays;
 @Configuration
 public class CorsConfig {
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://e-commerce-albums.vercel.app"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
+        configuration.addAllowedOriginPattern("*"); // Permite qualquer origem
+        configuration.addAllowedMethod("*"); // Permite todos os métodos HTTP
+        configuration.addAllowedHeader("*"); // Permite todos os cabeçalhos
+
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
