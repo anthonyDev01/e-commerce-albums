@@ -7,7 +7,7 @@ spring:
   application:
     name: ecomerce
   datasource:
-    url: jdbc:postgresql://localhost:5432/bootcamp
+    url: jdbc:postgresql://database:5432/bootcamp
     username: postgres
     password: postgres
   jpa:
