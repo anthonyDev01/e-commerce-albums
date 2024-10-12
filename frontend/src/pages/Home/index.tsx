@@ -19,7 +19,7 @@ const Home = () => {
                         <Button className="bg-sysmap_ligth text-black text-xl">
                             Inscrever-se
                         </Button>
-                    </Li>
+                    </Link>
                 </div>
             </main>
         </>
