@@ -6,7 +6,7 @@ export const api = axios.create({
     //baseURL: "http://localhost:8080/api/",
 });
 
-console.log("API URL:", import.meta.env.VITE_API_URL);
+console.log("API URL HTTP:", import.meta.env.VITE_API_URL);
 
 
 export function getHeaders() {
