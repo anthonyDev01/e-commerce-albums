@@ -50,11 +50,11 @@ Sequência de execução do projeto:
 6. Execute os comandos na respectiva ordem:
 
 ```bash
-docker-compose build
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
 ```
    
 ```bash
-docker-compose up -d
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 8. Localize e clique no botão "Play" (verde) localizado na parte superior da IDE.
 9. Um terminal integrado será aberto.
