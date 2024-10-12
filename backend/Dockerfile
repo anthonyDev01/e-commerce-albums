@@ -17,10 +17,6 @@ WORKDIR /app
 # Copia o JAR gerado da etapa build (corrigido de builder para build)
 COPY --from=build /app/target/*.jar /app/app.jar
 
-# Configurações do banco de dados
-ENV SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
-ENV SPRING_DATASOURCE_USERNAME=postgres
-ENV SPRING_DATASOURCE_PASSWORD=postgres
 
 # Expõe a porta 8080
 EXPOSE 8080
