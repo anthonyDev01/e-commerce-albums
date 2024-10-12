@@ -7,7 +7,7 @@ COPY . .
 RUN mvn clean package -Dmaven.test.skip=true
 RUN ls target/
 
-COPY target/*.jar app.jar
+COPY --from=build /app/target/*.jar /app/app.jar
 
 ENV SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
 ENV SPRING_DATASOURCE_USERNAME=postgres
