@@ -51,7 +51,7 @@ const ModalAlbum = ({ selectedAlbum, onClick }: ModalAlbumProps) => {
             .then((response) => {
                 toast.dismiss(toastId);
                 console.log(response.data);
-
+                onClick();
                 toast.success("Album comprado com sucesso");
             })
             .catch((error) => {
