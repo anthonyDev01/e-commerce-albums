@@ -2,11 +2,11 @@ import axios from "axios";
 
 export const api = axios.create({
     //baseURL: "http://167.99.7.170:8081/api/",
-    baseURL: process.env.REACT_APP_API_URL,
+    baseURL: import.meta.env.VITE_API_URL,
     //baseURL: "http://localhost:8080/api/",
 });
 
-console.log("API URL:", process.env.REACT_APP_API_URL);
+console.log("API URL:", import.meta.env.VITE_API_URL);
 
 
 export function getHeaders() {
