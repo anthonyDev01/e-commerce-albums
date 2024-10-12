@@ -23,13 +23,19 @@ const LoginToggle = ({ openMenu }: LoginToggleProps) => {
             } w-full p-3 flex-col items-center justify-between gap-3 s440:flex-row s440:h-[11.5vh]  s540:gap-16 s840:flex s840:static s840:gap-3 s840:h-[47.58px] s840:p-0 s840:w-[412px] s840:bg-transparent s840:backdrop-blur-none`}
         >
             {!token ? (
-                <div className="w-9/12 flex justify-around flex-col gap-3 h-full s440:flex-row s440:justify-between s440:w-full">
-                    <Link to="/login" className="h-2/4">
+                <div className="w-9/12 flex justify-around items-center flex-col gap-3 h-full s440:flex-row s440:justify-center s440:w-full">
+                    <Link
+                        to="/login"
+                        className="h-[47.58px] w-[200px]"
+                    >
                         <Button className="bg-sysmap_black text-white text-xl">
                             Entrar
                         </Button>
                     </Link>
-                    <Link to="/register" className="h-2/4">
+                    <Link
+                        to="/register"
+                        className="h-[47.58px] w-[200px]"
+                    >
                         <Button className="bg-sysmap_ligth text-black text-xl">
                             Inscrever-se
                         </Button>
