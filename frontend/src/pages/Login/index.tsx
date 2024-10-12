@@ -20,7 +20,6 @@ const Login = () => {
     const { login } = useAuth();
 
     const onSubmit: SubmitHandler<User> = (data) => {
-        console.log(data);
         setLoading(true);
         const toastId = toast.loading("Acessando sua conta...");
 
