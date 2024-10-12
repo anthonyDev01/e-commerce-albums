@@ -84,7 +84,7 @@ const MyDiscs = () => {
 
                 <div className="w-10/12 flex justify-end">
                     <ListAlbums
-                        className="justify-start "
+                        className="justify-center s640:justify-start s640:items-start"
                         dataAlbum={albums}
                         myAlbums={albums}
                         onClick={handleModal}
