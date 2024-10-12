@@ -25,7 +25,7 @@ public class TransactionResponseDto {
     private LocalDateTime created_at;
     private Integer points_earned;
     private String artist_name;
-    private ExternalUrlsWrapperDto spotify_url;
+    private String spotify_url;
     private String image_url;
     private LocalDateTime deleted_at;
 
@@ -38,7 +38,7 @@ public class TransactionResponseDto {
         this.created_at = transaction.getCreatedAt();
         this.points_earned = transaction.getPointsEarned();
         this.artist_name = albumMap.getArtistName().get(0).getName();
-        this.spotify_url = albumMap.getSpotifyUrl();
+        this.spotify_url = albumMap.getSpotifyUrl().getExternalUrls().getSpotify();
         this.image_url = albumMap.getImages().get(0).getUrl();
         this.deleted_at = transaction.getAlbum().getDeletedAt();
     }
