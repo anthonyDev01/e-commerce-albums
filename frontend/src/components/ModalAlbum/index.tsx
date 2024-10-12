@@ -60,7 +60,7 @@ const ModalAlbum = ({ selectedAlbum, onClick }: ModalAlbumProps) => {
 
                 const errorMessage = error.response?.data?.message;
 
-                if (error.response.code === 409)
+                if (errorMessage === "This album has already been purchased")
                     toast.error("Você já possui esse álbum!");
                 else if (errorMessage === "The balance is insufficient")
                     toast.error("Você não possui saldo suficiente!");
