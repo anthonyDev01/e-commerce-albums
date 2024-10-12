@@ -19,7 +19,6 @@ public class CorsConfig {
         configuration.addAllowedMethod("*"); // Permite todos os métodos HTTP
         configuration.addAllowedHeader("*"); // Permite todos os cabeçalhos
 
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

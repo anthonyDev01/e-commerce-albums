@@ -1,32 +1,3 @@
 spring:
-  ssl:
-    key-store: classpath:cert.p12
-    key-store-password: ""
-    key-store-type: PKCS12
-    key-alias: selfsigned
-  application:
-    name: ecomerce
-  datasource:
-    url: jdbc:postgresql://localhost:5432/bootcamp
-    username: postgres
-    password: postgres
-  jpa:
-    show-sql: true
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    generate-ddl: true
-    defer-datasource-initialization: true
-  api:
-    security:
-      token:
-        secret: ${JWT_SECRET:502913bfdd49eab564282dff101e6d167321237eeec66eedb2a438ed80fdeaa0}
-
-spotify:
-  client-id: 72aa391c620d45c29e0590a1bcb679be
-  client-secret: c685961b3b564ad6a25e6a8ce3010d80
-
-
-server:
-  port: 8080
-  servlet:
-    context-path: /api
+  profiles:
+    active: dev
