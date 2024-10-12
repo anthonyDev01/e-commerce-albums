@@ -2,6 +2,10 @@ FROM openjdk:17-jdk AS build
 
 WORKDIR /app
 
+COPY . .
+
+RUN mvn clean package -DskipTests
+
 COPY target/*.jar app.jar
 
 ENV SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
